@@ -15,6 +15,7 @@ module "security_groups_mod" {
   environment  = var.environment
 }
 
+
 module "alb_mod" {
   source        = "./modules/alb"
   project_name  = var.project_name
@@ -22,4 +23,17 @@ module "alb_mod" {
   alb_sg_id     = module.security_groups_mod.alb_sg_id
   public_subnet = module.vpc_mod.public_subnet
   vpc_id        = module.vpc_mod.vpc_id
+}
+
+module "ecs_mod" {
+  source          = "./modules/ecs"
+  aws_region      = var.aws_region
+  project_name    = var.project_name
+  environment     = var.environment
+  alb_sg_id       = module.security_groups_mod.alb_sg_id
+  private_subnet  = module.vpc_mod.private_subnet
+  vpc_id          = module.vpc_mod.vpc_id
+  container_image = var.container_image
+  alb_tg_lb_arn   = module.alb_mod.alb_tg_lb_arn
+  ecs_sg_id       = module.security_groups_mod.ecs_sg_id
 }

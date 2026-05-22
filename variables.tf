@@ -28,3 +28,8 @@ variable "environment" {
   type    = string
   default = "dev"
 }
+
+variable "container_image" {
+  type        = string
+  description = "Full ECR image uri"
+}

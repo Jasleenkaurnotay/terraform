@@ -10,7 +10,7 @@ output "alb_tg_id" {
     value = aws_lb_target_group.alb_tg.id
 }
 
-output "alb_tg_lb_id" {
+output "alb_tg_lb_arn" {
     value = aws_lb_target_group.alb_tg.arn
 }
 
