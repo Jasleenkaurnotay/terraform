@@ -30,9 +30,7 @@ module "ecs_mod" {
   aws_region      = var.aws_region
   project_name    = var.project_name
   environment     = var.environment
-  alb_sg_id       = module.security_groups_mod.alb_sg_id
   private_subnet  = module.vpc_mod.private_subnet
-  vpc_id          = module.vpc_mod.vpc_id
   container_image = var.container_image
   alb_tg_lb_arn   = module.alb_mod.alb_tg_lb_arn
   ecs_sg_id       = module.security_groups_mod.ecs_sg_id
@@ -47,4 +45,11 @@ module "rds_mod" {
   db_name      = var.db_name
   db_password  = var.db_password
   db_username  = var.db_username
+}
+
+module "route53_mod" {
+  source       = "./modules/route53"
+  alb_dns_name = module.alb_mod.alb_dns_name
+  domain_name  = var.domain_name
+  alb_zone_id  = module.alb_mod.alb_zone_id
 }

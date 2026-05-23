@@ -32,12 +32,11 @@ resource "aws_db_instance" "rds_db" {
   password             = "${var.db_password}"
   apply_immediately = true
   ca_cert_identifier = data.aws_rds_certificate.latest.id
-  database_insights_mode = "standard"
   db_subnet_group_name = aws_db_subnet_group.rds_db_subnet_group.name
   publicly_accessible = false
   storage_type = "gp2"
   vpc_security_group_ids = [var.rds_sg_id]
-  skip_final_snapshot = "true"
+  skip_final_snapshot = true
 
   tags = {
     Name = "${var.project_name}-rds-db"

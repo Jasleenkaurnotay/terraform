@@ -105,7 +105,7 @@ resource "aws_ecs_service" "ecs_srv" {
     scheduling_strategy = "REPLICA"
     depends_on = [ aws_iam_role_policy_attachment.ecs_execution_policy ]
     network_configuration {
-      assign_public_ip = "false"
+      assign_public_ip = false
       security_groups = [var.ecs_sg_id]
       subnets = var.private_subnet
     }

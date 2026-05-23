@@ -43,6 +43,10 @@ variable "db_username" {
 }
 
 variable "db_password" {
+  type      = string
+  sensitive = true # Value is sensitive
+}
+
+variable "domain_name" {
   type = string
-  sensitive = true        # Value is sensitive
 }

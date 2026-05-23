@@ -14,3 +14,7 @@ output "alb_tg_lb_arn" {
     value = aws_lb_target_group.alb_tg.arn
 }
 
+output "alb_zone_id" {
+    value = aws_lb.alb.zone_id
+}
+

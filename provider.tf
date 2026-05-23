@@ -5,8 +5,16 @@ terraform {
       version = "~> 5.0" #Any version in the 5.x series, equivalent to >= 5.0, <6.0
     }
   }
+
+  backend "s3" {
+    bucket       = "mylabs-terraform-state"
+    key          = "dev/state/terraform.tfstate"
+    region       = "us-east-1"
+    use_lockfile = true
+    encrypt      = true
+  }
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = "us-east-1"
 }
