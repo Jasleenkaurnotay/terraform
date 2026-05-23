@@ -37,3 +37,14 @@ module "ecs_mod" {
   alb_tg_lb_arn   = module.alb_mod.alb_tg_lb_arn
   ecs_sg_id       = module.security_groups_mod.ecs_sg_id
 }
+
+module "rds_mod" {
+  source       = "./modules/rds"
+  project_name = var.project_name
+  environment  = var.environment
+  rds_subnet   = module.vpc_mod.rds_subnet
+  rds_sg_id    = module.security_groups_mod.rds_sg_id
+  db_name      = var.db_name
+  db_password  = var.db_password
+  db_username  = var.db_username
+}

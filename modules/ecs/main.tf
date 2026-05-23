@@ -37,6 +37,12 @@ resource "aws_iam_role" "ecs_iam_role" {
             },
         ]
     })
+
+    tags = {
+        Name = "${var.project_name}-ecs-role"
+        Environment = "${var.environment}"
+        ManagedBy = "Terraform"
+    }
 }
 
 # Attach the managed policy to the IAM role
@@ -76,7 +82,7 @@ resource "aws_ecs_task_definition" "ecs_service" {
             portMappings = [
                 {
                     containerPort = "${var.container_port}"
-                    hostPort = 8000
+                    hostPort = "${var.container_port}"
                 }
             ]
         }
