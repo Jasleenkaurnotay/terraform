@@ -70,6 +70,12 @@ resource "aws_ecs_task_definition" "ecs_service" {
             name = "${var.project_name}-app-container"
             image = "${var.container_image}"
             essential = true
+            environment = [
+                {
+                    name = "DB_LINK"
+                    value = "postgresql://${var.db_username}:${var.db_password}@${var.rds_endpoint}/${var.db_name}"
+                }
+            ]
             logConfiguration = {
                 logDriver = "awslogs"
                 options = {

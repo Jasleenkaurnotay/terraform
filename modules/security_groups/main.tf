@@ -58,8 +58,8 @@ resource "aws_vpc_security_group_ingress_rule" "ecs_sg_app_port" {
     security_group_id = aws_security_group.ecs_sg.id
     referenced_security_group_id = aws_security_group.alb_sg.id     # Allow incoming traffic only from alb-sg
     ip_protocol = "tcp"
-    to_port = 5000
-    from_port = 5000
+    to_port = 8000
+    from_port = 8000
 }
 
 # allow all outbound — standard for ALB, ECS, RDS

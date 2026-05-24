@@ -43,3 +43,20 @@ variable "alb_tg_lb_arn" {
 variable "ecs_sg_id" {
   type = string
 }
+
+variable "db_name" {
+  type = string
+}
+
+variable "db_username" {
+  type = string
+}
+
+variable "rds_endpoint" {
+  type = string
+}
+
+variable "db_password" {
+  type      = string
+  sensitive = true # Value is sensitive
+}

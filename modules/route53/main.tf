@@ -19,6 +19,6 @@ resource "aws_route53_record" "www" {
 
 #Query for certificate stored in ACM
 data "aws_acm_certificate" "issued_cert" {
-  domain   = "${var.domain_name}"
+  domain   = "*.${var.domain_name}"
   statuses = ["ISSUED"]
 }

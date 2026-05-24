@@ -43,7 +43,7 @@ resource "aws_lb_listener" "http_list" {
 # Type: IP target group because Fargate tasks dont have instance IDs
 resource "aws_lb_target_group" "alb_tg" {
     name = "${var.project_name}-alb-tg"
-    port = 5000
+    port = 8000
     protocol = "HTTP"
     target_type = "ip"
     vpc_id = var.vpc_id
@@ -52,7 +52,7 @@ resource "aws_lb_target_group" "alb_tg" {
       enabled = "true"
       unhealthy_threshold = 3
       interval = 30
-      path = "/"
+      path = "/login"
       port = "traffic-port"
       protocol = "HTTP"
     }

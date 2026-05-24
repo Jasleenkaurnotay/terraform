@@ -34,6 +34,10 @@ module "ecs_mod" {
   container_image = var.container_image
   alb_tg_lb_arn   = module.alb_mod.alb_tg_lb_arn
   ecs_sg_id       = module.security_groups_mod.ecs_sg_id
+  rds_endpoint = module.rds_mod.rds_endpoint
+  db_name = var.db_name
+  db_username = var.db_username
+  db_password = var.db_password
 }
 
 module "rds_mod" {
