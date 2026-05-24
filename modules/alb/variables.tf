@@ -18,3 +18,7 @@ variable "public_subnet" {
 variable "vpc_id" {
   type = string
 }
+
+variable "cert_arn" {
+  type = string
+}

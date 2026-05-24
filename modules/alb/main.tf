@@ -28,16 +28,18 @@ resource "aws_lb_listener" "http_list" {
 }
 
 # Create ALB HTTPS listener
-#resource "aws_lb_listener" "https_list" {
-#    load_balancer_arn = aws_lb.alb.arn
-#    port = "443"
-#    protocol = "HTTPS"
-#    
-#    default_action {
-#      type = "forward"
-#      target_group_arn = aws_lb_target_group.alb_tg.arn
-#    }
-#}
+resource "aws_lb_listener" "https_list" {
+    load_balancer_arn = aws_lb.alb.arn
+    port = "443"
+    protocol = "HTTPS"
+    ssl_policy        = "ELBSecurityPolicy-2016-08"  # ← add this
+    certificate_arn   = "${var.cert_arn}"
+    
+    default_action {
+      type = "forward"
+      target_group_arn = aws_lb_target_group.alb_tg.arn
+    }
+}
 
 # Create target group where ALB forwards traffic to
 # Type: IP target group because Fargate tasks dont have instance IDs

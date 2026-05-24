@@ -23,6 +23,7 @@ module "alb_mod" {
   alb_sg_id     = module.security_groups_mod.alb_sg_id
   public_subnet = module.vpc_mod.public_subnet
   vpc_id        = module.vpc_mod.vpc_id
+  cert_arn      = module.route53_mod.cert_arn
 }
 
 module "ecs_mod" {
@@ -34,10 +35,10 @@ module "ecs_mod" {
   container_image = var.container_image
   alb_tg_lb_arn   = module.alb_mod.alb_tg_lb_arn
   ecs_sg_id       = module.security_groups_mod.ecs_sg_id
-  rds_endpoint = module.rds_mod.rds_endpoint
-  db_name = var.db_name
-  db_username = var.db_username
-  db_password = var.db_password
+  rds_endpoint    = module.rds_mod.rds_endpoint
+  db_name         = var.db_name
+  db_username     = var.db_username
+  db_password     = var.db_password
 }
 
 module "rds_mod" {

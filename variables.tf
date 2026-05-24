@@ -4,8 +4,8 @@ variable "aws_region" {
 }
 
 variable "aws_profile" {
-  type = string
-  default = ""      # empty in CI/CD, set in tfvars locally
+  type    = string
+  default = "" # empty in CI/CD, set in tfvars locally
 }
 
 variable "project_name" {
