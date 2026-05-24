@@ -3,6 +3,11 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
+variable "aws_profile" {
+  type = string
+  default = ""      # empty in CI/CD, set in tfvars locally
+}
+
 variable "project_name" {
   type = string
 }
