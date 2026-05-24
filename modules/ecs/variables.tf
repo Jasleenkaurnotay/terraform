@@ -33,7 +33,7 @@ variable "task_memory" {
 
 variable "container_port" {
   type = number
-  default = 5000
+  default = 8000
 }
 
 variable "alb_tg_lb_arn" {
