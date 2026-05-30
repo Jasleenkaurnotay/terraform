@@ -3,3 +3,12 @@
 terraform.tfvars 
 .DS_Store
 *.tfstate
+
+# Python
+app/venv/
+app/__pycache__/
+app/*.pyc
+app/.pytest_cache/
+
+# Mac
+.DS_Store
