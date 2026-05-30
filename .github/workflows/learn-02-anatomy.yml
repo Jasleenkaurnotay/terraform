@@ -1,0 +1,54 @@
+name: Exercise 2 - Variables
+
+on:
+  workflow_dispatch:
+
+env:
+  APP_NAME: flask-app          # workflow-level
+  ENVIRONMENT: production
+
+jobs:
+  variable-demo:
+    runs-on: ubuntu-latest
+    env:
+      ENVIRONMENT: staging     # job-level override
+
+    steps:
+      - name: Context variables
+        run: |
+          echo "=== GitHub Context ==="
+          echo "Repo: ${{ github.repository }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Branch: ${{ github.ref_name }}"
+
+      - name: Env vars - scoping
+        run: |
+          echo "=== Env Vars ==="
+          echo "App: $APP_NAME"
+          echo "Environment (job-level): $ENVIRONMENT"
+
+      - name: Step-level override
+        env:
+          ENVIRONMENT: dev     # step-level override
+        run: |
+          echo "Environment (step-level): $ENVIRONMENT"
+
+      - name: Secrets - safe usage
+        env:
+          MY_SECRET: ${{ secrets.TEST_SECRET }}
+        run: |
+          echo "=== Secrets ==="
+          echo "Secret is set: ${{ secrets.TEST_SECRET != '' }}"
+          echo "Trying to print secret: $MY_SECRET"
+          echo "Direct print attempt: ${{ secrets.TEST_SECRET }}"
+
+      - name: What your pipeline will actually use
+        env:
+          AWS_REGION: ap-south-1
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          echo "=== Real Pipeline Variables ==="
+          echo "Region: $AWS_REGION"
+          echo "Image will be tagged: $IMAGE_TAG"
+          echo "Full ECR image URI would be:"
+          echo "  <account-id>.dkr.ecr.$AWS_REGION.amazonaws.com/flask-app:$IMAGE_TAG"
