@@ -25,3 +25,25 @@ CMD ["gunicorn", "--bind", "0.0.0.0:8000", "run:app"]
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
   CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')" || exit 1
+
+
+
+## My dockerfile
+# Stage 1: Build
+FROM python:3.13-slim AS builder
+
+WORKDIR /app
+
+COPY requirements.txt requirements.txt 
+
+RUN pip install -r requirements.txt
+
+COPY /app/ .
+
+CMD ["python", "run.py"]
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+CMD -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')" || exit 1
+
